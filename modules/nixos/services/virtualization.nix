@@ -1,5 +1,5 @@
 # nixos-config/modules/nixos/services/virtualization.nix
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   # KVM und QEMU für virtuelle Maschinen
@@ -39,7 +39,8 @@
   ];
 
   # Benutzer 'nick' zu den relevanten Gruppen hinzufügen (teilweise schon in common.nix)
-  users.users.nick.extraGroups = lib.mkIf config.users.users.nick.isNormalUser [
+  # Hier wird lib.mkIf verwendet, um die Zeile nur hinzuzufügen, wenn der Benutzer 'nick' existiert und ein normaler Benutzer ist.
+  users.users.nick.extraGroups = lib.mkIf (config.users.users.nick != null && config.users.users.nick.isNormalUser == true) [
     "libvirtd" # Für die Verwaltung von VMs mit virt-manager
     "docker"   # Für die Verwendung von Docker
   ];

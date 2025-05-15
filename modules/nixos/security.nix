@@ -1,5 +1,5 @@
 # nixos-config/modules/nixos/security.nix
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   # AppArmor (mandatory access control)
@@ -35,7 +35,10 @@
 
   # Optimierungen für Startzeit und Speichernutzung
   # Zstd Kompression für initrd (kann Bootzeit leicht verbessern)
-  boot.initrd.compression = "zstd";
+  # Korrigierte Option:
+  boot.initrd.compressor = "zstd";
+  # Optional: Argumente für den Kompressor, z.B. Kompressionslevel
+  # boot.initrd.compressorArgs = [ "-10" ]; # Beispiel für zstd Kompressionslevel 10
 
   # Firejail für Anwendungs-Sandboxing (optional, kann per Home Manager oder systemweit)
   # programs.firejail.enable = true;
