@@ -22,7 +22,7 @@ in
   home = {
     username = "nick";
     homeDirectory = "/home/nick";
-    stateVersion = "23.11"; # Anpassen an Ihre NixOS Version (z.B. "24.05")
+    stateVersion = "24.05"; # Anpassen an Ihre NixOS Version (z.B. "24.05")
 
     # Umgebungsvariablen für den Benutzer
     sessionVariables = {
@@ -86,8 +86,8 @@ in
   # Git Konfiguration
   programs.git = {
     enable = true;
-    userName = "Nick";
-    userEmail = "nick@example.com"; # Anpassen!
+    userName = "nick4vh";
+    userEmail = "nick@viereggeheyng.de"; # Anpassen!
     signing = {
       key = null; # Hier GPG Key ID eintragen, falls Commits signiert werden sollen
       signByDefault = false;

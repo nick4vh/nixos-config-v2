@@ -24,8 +24,8 @@
           inherit system;
           specialArgs = { inherit inputs; currentSystem = currentSystemName; } // specialArgs;
           modules = [
-            # Host-spezifische Hardware-Konfiguration
-            ./hosts/${hostname}.nix
+            # Host-spezifische Konfiguration (importiert jetzt default.nix aus dem Host-Verzeichnis)
+            ./hosts/${hostname}/default.nix
             # Gemeinsame Module
             ./modules/nixos/common.nix
             ./modules/nixos/services/audio.nix
