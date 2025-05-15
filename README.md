@@ -37,7 +37,7 @@ Diese Konfiguration verwaltet mehrere NixOS-Systeme und Desktop-Umgebungen über
 1.  **Konfiguration kopieren/klonen:**
     Klonen Sie dieses Repository auf Ihr System, z.B. nach `~/nixos-config` oder `/etc/nixos/nixos-config` (wenn Sie es systemweit verwalten möchten).
     ```bash
-    git clone <url-des-repositories> ~/nixos-config
+    git clone https://github.com/nick4vh/nixos-config-v2 ~/nixos-config
     cd ~/nixos-config
     ```
 
