@@ -42,6 +42,7 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "hm-bak";
               home-manager.extraSpecialArgs = { inherit inputs; inherit hostname; currentSystem = currentSystemName; }; # hostname und currentSystem für Home Manager
               home-manager.users.nick = import ./modules/home-manager/nick/default.nix;
             }

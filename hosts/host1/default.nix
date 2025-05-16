@@ -19,7 +19,7 @@
   boot.loader.grub = {
     enable = true;
     device = "/dev/sda"; # Wird oft in hardware-configuration.nix gesetzt. Falls nicht, hier eintragen.
-    efiSupport = true;
+    efiSupport = false;
     efiInstallAsRemovable = false;
     timeout = 5;
   };

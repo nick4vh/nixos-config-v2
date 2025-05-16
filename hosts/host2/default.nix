@@ -18,7 +18,7 @@
   boot.loader.grub = {
     enable = true;
     device = "/dev/sda"; # Oft in hardware-configuration.nix
-    efiSupport = true;
+    efiSupport = false;
     efiInstallAsRemovable = false;
     timeout = 5;
   };
