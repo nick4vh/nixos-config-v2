@@ -83,7 +83,12 @@
   };
 
   # Grundlegende X11 und Wayland Unterstützung
-  services.xserver.enable = true; # Auch für Wayland oft benötigt (XWayland)
+  services.xserver = {
+    enable = true;
+    layout = "de"; # Tastaturlayout auf Deutsch setzen
+    # variant = "nodeadkeys"; # Optional: Variante ohne tote Tasten (z.B. für Programmierung)
+    # xkbOptions = "eurosign:e,caps:escape"; # Optionale XKB-Optionen
+  };
 
   # Programme können 32-Bit Bibliotheken benötigen (z.B. Steam)
   hardware.opengl.enable = true;

@@ -67,7 +67,6 @@
     extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
     # gtkUsePortal = true;
   };
-
   # Optionales Sound-Theme
   # sound.theme = "freedesktop";
 }

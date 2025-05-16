@@ -196,4 +196,59 @@ in
       };
     };
   };
+
+  # KDE-spezifische Einstellungen für den Benutzer 'nick'
+  # Diese werden nur angewendet, wenn 'isKDE' wahr ist (d.h. ein KDE-Desktop gebaut wird).
+  home.file = lib.mkIf isKDE {
+    ".config/ksmserverrc".text = ''
+      [General]
+      loginMode=emptySession
+    '';
+    # Hier könnten weitere KDE-spezifische Benutzerdateien konfiguriert werden,
+    # z.B. .config/kdeglobals, .config/plasma-org.kde.plasma.desktop-appletsrc etc.
+    # Beispiel:
+    # ".config/kdeglobals".text = ''
+    #   [KDE]
+    #   SingleClick=false
+    # '';
+  };
+
+  # Autostart-Einträge
+  xdg.configFile = {
+    "autostart/spotify.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Exec=spotify
+      Hidden=false
+      X-GNOME-Autostart-enabled=true
+      Name=Spotify
+    '';
+
+    "autostart/discord.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Exec=discord
+      Hidden=false
+      X-GNOME-Autostart-enabled=true
+      Name=Discord
+    '';
+
+    "autostart/firefox.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Exec=firefox
+      Hidden=false
+      X-GNOME-Autostart-enabled=true
+      Name=Firefox
+    '';
+
+    "autostart/nextcloud.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Exec=nextcloud
+      Hidden=false
+      X-GNOME-Autostart-enabled=true
+      Name=Nextcloud
+    '';
+  };
 }
