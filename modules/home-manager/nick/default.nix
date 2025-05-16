@@ -72,8 +72,8 @@ in
   };
 
   # XDG Portale (wichtig für Flatpak, Snap, Screensharing etc.)
-  xdg.portal = {
-    enable = true; # Stellt sicher, dass xdg-desktop-portal läuft
+  # xdg.portal = {
+    # enable = true; # Stellt sicher, dass xdg-desktop-portal läuft
     # Die extraPortals werden oft vom System-Desktop-Modul bereitgestellt.
     # Hier können sie ergänzt oder überschrieben werden.
     # extraPortals = with pkgs;
@@ -81,7 +81,7 @@ in
     #   lib.optionals isGNOME [ xdg-desktop-portal-gnome ] ++ # GNOME bringt seinen eigenen Portal mit
     #   lib.optionals isHyprland [ xdg-desktop-portal-hyprland xdg-desktop-portal-wlr xdg-desktop-portal-gtk ];
     # gtkUsePortal = true; # Erzwingt die Nutzung von Portalen für GTK-Dateidialoge
-  };
+  # };
 
   # Git Konfiguration
   programs.git = {
@@ -96,7 +96,7 @@ in
       init.defaultBranch = "main";
       core.editor = "nvim";
       # Weitere Git-Einstellungen
-      "credential.helper" = if pkgs.stdenv.isLinux then "${pkgs.libsecret}/bin/git-credential-libsecret" else null;
+      # "credential.helper" = if pkgs.stdenv.isLinux then "${pkgs.libsecret}/bin/git-credential-libsecret" else null;
     };
     # LFS Unterstützung
     lfs.enable = true;

@@ -17,9 +17,10 @@
   # Bootloader-Konfiguration (siehe Hinweise in hosts/host1/default.nix)
   boot.loader.grub = {
     enable = true;
-    # device = "/dev/sda"; # Oft in hardware-configuration.nix
+    device = "/dev/sda"; # Oft in hardware-configuration.nix
     efiSupport = true;
-    efiInstallAsRemovable = true;
+    efiInstallAsRemovable = false;
+    timeout = 5;
   };
   boot.loader.efi.canTouchEfiVariables = true; # Oft in hardware-configuration.nix
 

@@ -18,9 +18,10 @@
   # Die folgenden Einstellungen sind Beispiele und sollten an die hardware-configuration.nix angepasst werden.
   boot.loader.grub = {
     enable = true;
-    # device = "/dev/sda"; # Wird oft in hardware-configuration.nix gesetzt. Falls nicht, hier eintragen.
+    device = "/dev/sda"; # Wird oft in hardware-configuration.nix gesetzt. Falls nicht, hier eintragen.
     efiSupport = true;
-    efiInstallAsRemovable = true;
+    efiInstallAsRemovable = false;
+    timeout = 5;
   };
   boot.loader.efi.canTouchEfiVariables = true; # Oft in hardware-configuration.nix
 

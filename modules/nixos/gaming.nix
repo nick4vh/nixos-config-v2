@@ -4,8 +4,6 @@
 {
   # Vulkan Unterstützung (bereits in common.nix und hardware Modulen, hier zur Verdeutlichung)
   hardware.opengl.enable = true;
-  hardware.opengl.driSupport = true;
-  hardware.opengl.driSupport32Bit = true;
 
   # Pakete für Gaming (einige sind besser als User-Pakete, aber hier als Systemoption für Bibliotheken)
   environment.systemPackages = with pkgs; [
@@ -34,12 +32,13 @@
   # Wenn ein spezieller Kernel verwendet wird, sicherstellen, dass externe Module (NVIDIA) kompatibel sind.
   # NixOS handhabt dies meist gut.
 
-  # Controller Support (oft Out-of-the-Box)
-  hardware.joystick.enable = true; # Stellt sicher, dass Joystick-Support im Kernel ist
+  # Controller Support
+  # Grundlegende Joystick-Unterstützung ist normalerweise im Kernel enthalten.
+  # Spezifische Controller-Unterstützung kann über udev-Regeln oder Pakete hinzugefügt werden.
   services.udev.packages = with pkgs; [
-    # Pakete für spezifische Controller-Unterstützung, falls nötig
-    # z.B. `xboxdrv` (älter), `xone` (für moderne Xbox Controller)
-    # `ds4drv` (für DualShock 4, oft nicht mehr nötig)
+    # Pakete für spezifische Controller-Unterstützung, falls nötig:
+    # z.B. `xone-dkms` (für moderne Xbox Controller, erfordert Kernel-Header)
+    # `ds4drv` (für DualShock 4, oft nicht mehr nötig, da Kernel-Support gut ist)
     # Steam selbst bringt oft schon gute Controller-Unterstützung mit (Steam Input).
   ];
 

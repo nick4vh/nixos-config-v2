@@ -18,7 +18,7 @@
     # wget              # Bereits in systemPackages
     docker-client       # Docker CLI (Daemon kommt vom System)
     docker-compose      # Für Multi-Container Docker Applikationen
-    (postman.override { mengatasiCA = true; }) # Postman API Client (mit Workaround für CA-Probleme)
+    # (postman.override { mengatasiCA = true; }) # Postman API Client (mit Workaround für CA-Probleme)
     # Oder: insomnia # Alternative zu Postman
 
     # Design
@@ -85,14 +85,13 @@
     fd                  # Einfacher als find
     fzf                 # Fuzzy Finder für die Kommandozeile
     bat                 # Cat-Klon mit Syntax-Highlighting und Git-Integration
-    exa                 # Moderner Ersatz für ls (oder eza als Nachfolger)
     eza                 # Nachfolger von exa
     tldr                # Vereinfachte Manpages
     jq                  # JSON Prozessor
     yq-go               # YAML, JSON, XML Prozessor
     tree                # Verzeichnisbäume anzeigen
     ncdu                # Festplattenbelegung analysieren
-    silver-searcher-ag  # Code-Suchtool (ähnlich ack, grep)
+    silver-searcher  # Code-Suchtool (ähnlich ack, grep)
 
     # Für Shells.nix (Plugin Manager etc.)
     zsh-syntax-highlighting

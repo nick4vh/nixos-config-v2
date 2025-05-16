@@ -2,7 +2,6 @@
 { config, pkgs, ... }:
 
 {
-  sound.enable = true; # Grundlegende ALSA-Unterstützung
   hardware.pulseaudio.enable = false; # Deaktivieren, da wir Pipewire verwenden
 
   services.pipewire = {

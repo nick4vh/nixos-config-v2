@@ -33,6 +33,10 @@
     gnupg # Für Verschlüsselung und Signierung
   ];
 
+  nixpkgs.config.allowUnfree = true;
+
+  programs.zsh.enable = true;
+
   # Benutzer `nick`
   users.users.nick = {
     isNormalUser = true;
@@ -46,7 +50,8 @@
 
   # Nix Konfiguration
   nix = {
-    package = pkgs.nixFlakes; # Stellt sicher, dass Flakes aktiviert sind
+    # Korrigierte Option für das Nix-Paket:
+    package = pkgs.nixVersions.stable; # Ersetzt pkgs.nixFlakes
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
@@ -82,7 +87,6 @@
 
   # Programme können 32-Bit Bibliotheken benötigen (z.B. Steam)
   hardware.opengl.enable = true;
-  hardware.opengl.driSupport32Bit = true;
 
   # Secure Boot (optional, erfordert manuelle Einrichtung der Schlüssel)
   # boot.loader.secureBoot.enable = false; # Standardmäßig aus, da es Setup erfordert

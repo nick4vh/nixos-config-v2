@@ -24,7 +24,8 @@ in
     noto-fonts
     noto-fonts-emoji
     noto-fonts-cjk-sans # Für Chinesisch, Japanisch, Koreanisch
-    (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; }) # Nerd Fonts (Fira Code, JetBrains Mono)
+    nerd-fonts.fira-code
+    nerd-fonts.jetbrains-mono
 
     # Icon Theme
     tela-icon-theme
@@ -48,6 +49,7 @@ in
     # Beispiel Kvantum Themes:
     # matcha-themes # Enthält auch Kvantum Themes
   ];
+
 
   # GTK Theming
   gtk = {
@@ -82,21 +84,22 @@ in
   qt = {
     enable = true;
     platformTheme = if isKDE then "kde" else "gtk2"; # "kde", "gnome", "gtk2", "qtct"
+  } // lib.optionalAttrs (!isKDE) { # Fügt 'style' nur hinzu, wenn NICHT KDE aktiv ist
     # Style für Qt-Anwendungen. Mit KDE wird dies von Plasma selbst verwaltet.
     # Außerhalb von KDE kann man versuchen, es an GTK anzupassen oder Kvantum zu nutzen.
-    style = if isKDE then null # KDE handhabt seinen eigenen Stil
-            else if pkgs.stdenv.isLinux then "kvantum" # Kvantum für Qt5/Qt6 wenn nicht KDE
-            else "adwaita-dark"; # Fallback
+    style = if pkgs.stdenv.isLinux then "kvantum" # Kvantum für Qt5/Qt6 wenn nicht KDE
+            else "adwaita-dark"; # Fallback für andere Systeme oder wenn Kvantum nicht gewünscht
     # Für Qt6:
     # programs.qt6ct.enable = if !isKDE then true else false; # Qt6 Konfigurationstool
     # xsettingsd.enable = if !isKDE then true else false; # Für konsistente Settings über Toolkits hinweg
 
     # Kvantum Theme setzen (wenn Kvantum als Style gewählt wurde)
-    # home.file.".config/Kvantum/kvantum.kvconfig".text = lib.mkIf (!isKDE && pkgs.stdenv.isLinux) ''
+    # home.file.".config/Kvantum/kvantum.kvconfig".text = lib.mkIf (pkgs.stdenv.isLinux) ''
     #   [General]
     #   theme=KvCatppuccinMochaMauve # Name des Kvantum-Themes (muss installiert sein)
     # '';
   };
+
 
   # dconf Einstellungen für Theming (hauptsächlich für GNOME/GTK)
   # Wird teilweise von gtk Modul oben schon gesetzt, hier für spezifischere dconf keys
@@ -118,27 +121,38 @@ in
   ];
 
 
-  # Schriftkonfiguration für Fontconfig (systemweite Einstellungen)
+  # Schriftkonfiguration für Fontconfig
   fonts.fontconfig = {
     enable = true;
-    antialias = true; # Antialiasing aktivieren
-    hinting = {
-      enable = true;
-      style = "hintslight"; # "hintfull", "hintmedium", "hintslight", "hintnone"
-    };
-    subpixel.rgba = "rgb"; # "rgb", "bgr", "vrgb", "vbgr", "none" (an Monitor anpassen)
-    # Standard Schriftfamilien definieren
+    # Die folgenden Optionen (antialias, hinting, subpixel) sind hier nicht direkt als Attribute gültig.
+    # Sie müssten über fonts.fontconfig.localConf als XML konfiguriert werden, falls benötigt.
+    # Für die meisten Anwendungsfälle sind die Standardeinstellungen oder die Einstellungen
+    # der Desktop-Umgebung ausreichend.
+    # antialias = true; # Entfernt
+    # hinting = { # Entfernt
+    #   enable = true;
+    #   style = "hintslight";
+    # };
+    # subpixel.rgba = "rgb"; # Entfernt
+
+    # Standard Schriftfamilien definieren (dies ist eine gültige Home Manager Option)
     defaultFonts = {
       serif = [ "Noto Serif" ];
       sansSerif = [ "Noto Sans" ];
       monospace = [ "FiraCode Nerd Font Mono" "Noto Sans Mono" ]; # Fallback
       emoji = [ "Noto Color Emoji" ];
     };
-    # Optional: Fontconfig Regeln für spezifische Schriftarten oder Aliase
+    # Optional: Fontconfig Regeln für spezifische Schriftarten oder Aliase über localConf
     # localConf = ''
     #   <?xml version="1.0"?>
     #   <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
     #   <fontconfig>
+    #     <match target="font">
+    #       <edit name="antialias" mode="assign"><bool>true</bool></edit>
+    #       <edit name="hinting" mode="assign"><bool>true</bool></edit>
+    #       <edit name="hintstyle" mode="assign"><const>hintslight</const></edit>
+    #       <edit name="rgba" mode="assign"><const>rgb</const></edit>
+    #     </match>
     #     <match target="pattern">
     #       <test qual="any" name="family"><string>mono</string></test>
     #       <edit name="family" mode="assign" binding="strong">

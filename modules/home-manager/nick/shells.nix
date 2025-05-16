@@ -39,9 +39,6 @@ let
   };
 in
 {
-  # Standard-Shell für den Benutzer `nick` setzen
-  home.shell = if defaultShellChoice == "zsh" then pkgs.zsh else pkgs.fish;
-
   programs.zsh = {
     enable = (defaultShellChoice == "zsh");
     enableAutosuggestions = true; # Verwendet zsh-autosuggestions
@@ -67,9 +64,6 @@ in
       if command -v starship &> /dev/null; then
         eval "$(starship init zsh)"
       fi
-
-      # fzf-tab completion (Beispiel, falls fzf-tab installiert ist)
-      # source ${pkgs.fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
 
       # Direnv (falls verwendet und nicht schon global aktiviert)
       if command -v direnv &> /dev/null; then

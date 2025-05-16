@@ -5,7 +5,7 @@ let
   # Wähle den NVIDIA Treiber. 'stable' ist meist eine gute Wahl.
   # Optionen: 'latest', 'beta', 'production', 'open'.
   # Für ältere Karten ggf. 'legacy_XYZ' (z.B. legacy_470). Siehe NixOS Wiki.
-  nvidiaDriverPackage = pkgs.linuxPackages.nvidia_x11_stable; # Oder eine andere Version
+  nvidiaDriverPackage = pkgs.linuxPackages.nvidiaPackages.stable; # Oder eine andere Version
 in
 {
   # NVIDIA Treiber
@@ -37,7 +37,6 @@ in
 
   # OpenGL Unterstützung (wird auch in common.nix gesetzt, hier zur Sicherheit für NVIDIA)
   hardware.opengl.enable = true;
-  hardware.opengl.driSupport32Bit = true; # Für 32-Bit Spiele/Anwendungen (Steam, Wine)
 
   # Umgebungsvariablen für Wayland mit NVIDIA (kann helfen, ist aber oft nicht mehr nötig mit modernen Treibern/Compositors)
   # environment.sessionVariables = lib.mkIf config.hardware.nvidia.modesetting.enable {
