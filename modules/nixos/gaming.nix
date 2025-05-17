@@ -61,10 +61,7 @@
   # services.pipewire.alsa.support32Bit = true; # Wichtig für 32-Bit Spiele
 
   # Spezielle Einstellungen für Steam
-  # programs.steam = {
-  #   enable = true; # Systemweite Installation von Steam (oft besser per Home Manager)
-  #   remotePlay.enable = true;
-  #   dedicatedServer.enable = true;
-  #   localNetworkGameTransfers.enable = true;
-  # };
+  programs.steam = {
+    enable = true; # Systemweite Installation von Steam (oft besser per Home Manager)
+  };
 }
